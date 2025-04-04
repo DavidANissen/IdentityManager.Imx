@@ -1,0 +1,197 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "ccc-testgeneric",
+  "implicitDependencies": ["qer"],
+  "projectType": "application",
+  "sourceRoot": "projects/ccc-testgeneric/src",
+  "prefix": "imx",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "options": {
+        "outputPath": {
+          "base": "dist/ccc-testgeneric",
+          "browser": ""
+        },
+        "allowedCommonJsDependencies": [
+          "lodash",
+          "highlight.js",
+          "file-saver",
+          "billboard.js",
+          "moment-timezone",
+          "core-js/fn/map",
+          "core-js/fn/set",
+          "core-js/fn/weak-map",
+          "core-js/fn/array/from",
+          "core-js/fn/object/assign",
+          "core-js/es/array/from",
+          "core-js/es/object/assign",
+          "core-js/es/map",
+          "core-js/es/set",
+          "core-js/es/weak-map",
+          "lodash.debounce",
+          "lodash.clamp",
+          "moment",
+          "@elemental-ui/cadence-icon/codepoints"
+        ],
+        "index": "projects/ccc-testgeneric/src/index.html",
+        "browser": "projects/ccc-testgeneric/src/main.ts",
+        "polyfills": ["projects/ccc-testgeneric/src/polyfills.ts"],
+        "tsConfig": "projects/ccc-testgeneric/tsconfig.app.json",
+        "aot": true,
+        "assets": [
+          "projects/ccc-testgeneric/src/appconfig.json",
+          "projects/ccc-testgeneric/src/assets",
+          {
+            "glob": "**/*",
+            "input": "./html",
+            "output": "./html"
+          },
+          {
+            "glob": "**/*",
+            "input": "./shared/assets/",
+            "output": "./assets"
+          },
+          {
+            "glob": "**/*",
+            "input": "./node_modules/@elemental-ui/core/assets",
+            "output": "./assets"
+          }
+        ],
+        "styles": ["projects/ccc-testgeneric/src/styles.scss", "projects/qbm/src/lib/styles/imx-page-title.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "./shared/assets",
+            "./shared/scss",
+            "./node_modules",
+            "./node_modules/@elemental-ui/cadence-icon",
+            "./node_modules/@elemental-ui/core"
+          ]
+        }
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "projects/ccc-testgeneric/src/environments/environment.ts",
+              "with": "projects/ccc-testgeneric/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": true,
+          "extractLicenses": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "20mb",
+              "maximumError": "40mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb"
+            }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        },
+        "remote-dev": {
+          "fileReplacements": [
+            {
+              "replace": "projects/ccc-testgeneric/src/environments/environment.ts",
+              "with": "../imxweb_envs/ccc-testgeneric/environments/environment.remote-dev.ts"
+            }
+          ],
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        },
+        "remote-qs": {
+          "fileReplacements": [
+            {
+              "replace": "projects/ccc-testgeneric/src/environments/environment.ts",
+              "with": "../imxweb_envs/ccc-testgeneric/environments/environment.remote-qs.ts"
+            }
+          ],
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        },
+        "es5": {
+          "tsConfig": "./projects/ccc-testgeneric/tsconfig-es5.app.json"
+        }
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "ccc-testgeneric:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "ccc-testgeneric:build:production"
+        },
+        "development": {
+          "browserTarget": "ccc-testgeneric:build:development"
+        },
+        "remote-dev": {
+          "browserTarget": "ccc-testgeneric:build:remote-dev"
+        },
+        "remote-qs": {
+          "browserTarget": "ccc-testgeneric:build:remote-qs"
+        },
+        "es5": {
+          "browserTarget": "ccc-testgeneric:build:es5"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "ccc-testgeneric:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "projects/ccc-testgeneric/src/test.ts",
+        "polyfills": "projects/ccc-testgeneric/src/polyfills.ts",
+        "tsConfig": "projects/ccc-testgeneric/tsconfig.spec.json",
+        "karmaConfig": "projects/ccc-testgeneric/karma.conf.js",
+        "assets": ["projects/ccc-testgeneric/src/appconfig.json", "projects/ccc-testgeneric/src/assets"],
+        "styles": ["projects/ccc-testgeneric/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "./shared/assets",
+            "./shared/scss",
+            "./node_modules",
+            "./node_modules/@elemental-ui/cadence-icon",
+            "./node_modules/@elemental-ui/core"
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@angular-devkit/build-angular:tslint",
+      "options": {
+        "tsConfig": ["projects/ccc-testgeneric/tsconfig.app.json", "projects/ccc-testgeneric/tsconfig.spec.json"],
+        "exclude": ["**/node_modules/**"]
+      }
+    }
+  }
+}

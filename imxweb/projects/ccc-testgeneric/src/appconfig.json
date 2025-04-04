@@ -1,0 +1,11 @@
+{
+  "Title": "Test Generic App",
+  "WebAppIndex": "portal",
+  "Translation": {
+    "Langs": ["en-US", "de-DE", "de", "en"]
+  },
+  "routeConfig": {
+    "login": "",
+    "start": "start"
+  }
+}

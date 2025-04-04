@@ -110,7 +110,7 @@ export class AppService {
 
   private showSplash(): void {
     // open splash screen with fix values
-    this.splash.init({ applicationName: 'Custom App' });
+    this.splash.init({ applicationName: 'Test Generic App' });
   }
 
   private async updateSplash(title: string): Promise<void> {
