@@ -1,15 +1,15 @@
 <mat-card>
   <div mat-card-title>Hello world!</div>
 
-  <button mat-flat-button color="primary" (click)="loadPersonData()">Fetch some person data...</button>
+  <button mat-flat-button color="primary" (click)="loadCustomData()">Fetch some data from a custom table using generic API...</button>
 
   <mat-spinner *ngIf="busy"></mat-spinner>
 
   <div *ngIf="!busy && totalCount > 0">
-    <div>There are {{ totalCount }} identities in the address book. The first identities are:</div>
+    <div>There are {{ totalCount }} Data in the custom table. The first entries are:</div>
     <ul>
-      <li *ngFor="let person of persons">
-        {{ person.GetEntity().GetDisplay() }}
+      <li *ngFor="let entry of customEntries">
+        {{ entry.GetEntity().GetDisplay() }}
       </li>
     </ul>
   </div>

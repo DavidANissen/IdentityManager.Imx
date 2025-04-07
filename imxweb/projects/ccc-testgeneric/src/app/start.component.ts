@@ -25,12 +25,43 @@
  */
 
 import { Component } from '@angular/core';
-import { PortalPersonAll } from '@imx-modules/imx-api-qer';
 import { QerApiService } from 'qer';
+import { TestGenericAppApiService } from './app-client.service';
+import { PortalGenericCustomAll, V2ApiClientMethodFactory } from './TypedClient';
 
 @Component({
   templateUrl: './start.component.html',
 })
+export class StartComponent {
+  constructor(
+    private qerApi: QerApiService,
+    private testApi: TestGenericAppApiService
+  ) {}
+
+  private factory = new V2ApiClientMethodFactory();
+
+  customEntries: PortalGenericCustomAll[] = [];
+  totalCount = 0;
+  busy = false;
+
+  async loadCustomData() {
+    try {
+      this.busy = true;
+
+      // load test data from a custom table using the protal/generic API.
+      // This call uses the default parameters, which will
+      // return the first 20 identities in the database.
+      const customData = await this.testApi.typedClient.PortalGenericCustomAll.Get();
+
+      this.customEntries = customData.Data;
+      this.totalCount = customData.totalCount;
+    } finally {
+      // Even if the call fails, reset the busy flag
+      this.busy = false;
+    }
+  }
+}
+/*
 export class StartComponent {
   constructor(private qerApi: QerApiService) {}
 
@@ -55,3 +86,4 @@ export class StartComponent {
     }
   }
 }
+  */
